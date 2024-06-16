@@ -165,15 +165,6 @@ export const updateUser = async (
       throw createHttpError(406, "Missing data!");
     }
 
-    const existingUser = await User.findOne({ email });
-
-    if (existingUser) {
-      throw createHttpError(
-        400,
-        "User Already Exists. Please Choose a Different One Or Log In Instead."
-      );
-    }
-
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
